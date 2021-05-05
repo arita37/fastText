@@ -3,7 +3,7 @@ name: fastText
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   python-test:
