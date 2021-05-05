@@ -3,7 +3,7 @@ name: fastText
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   python-test:
@@ -43,7 +43,6 @@ jobs:
           . .github/workflows/setup.sh
           . .github/workflows/pull_data.sh
           . .github/workflows/cmake_test.sh
-          ls -al    
       - uses: actions/upload-artifact@v2
         with:
           name: cmake-artifact
