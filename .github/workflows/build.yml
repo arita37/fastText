@@ -1,0 +1,67 @@
+name: fastText
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  python-test:
+    runs-on: ubuntu-latest
+    container: 
+      image: centos:7.2.1511
+      options: --user root
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: |
+          . .github/workflows/setup.sh
+          ls -al
+          ls -al python
+          python3.7 -m pip install pybind11
+          python3.7 setup.py install
+          python3.7 runtests.py -u
+
+  build-gcc:
+    runs-on: ubuntu-latest
+    container: centos:7.2.1511
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: |
+          . .github/workflows/setup.sh
+          . .github/workflows/pull_data.sh
+          . .github/workflows/gcc_test.sh
+  
+  build-cmake:
+    runs-on: ubuntu-latest
+    container: centos:7.2.1511
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: |
+          . .github/workflows/setup.sh
+          . .github/workflows/pull_data.sh
+          . .github/workflows/cmake_test.sh
+          ls -al
+      - uses: actions/upload-artifact@v2
+        with:
+          name: cmake-artifact
+          path: result
+
+  website-build:
+    runs-on: ubuntu-latest
+    needs: build-cmake
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          check-latest: true
+      - run: |
+          git config --global user.email "docusaurus-bot@users.noreply.github.com"
+          git config --global user.name "Website Deployment Script"
+          echo "machine github.com login docusaurus-bot password $GITHUB_TOKEN_DOCUSAURUS_BOT" > ~/.netrc
+          cd website
+          npm install
+          GIT_USER=docusaurus-bot npm run publish-gh-pages
