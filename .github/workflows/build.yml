@@ -3,7 +3,7 @@ name: fastText
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   python-test:
@@ -16,14 +16,13 @@ jobs:
 
       - run: |
           . .github/workflows/setup.sh
-          ls -al
-          ls -al python
           python3.7 -m pip install pybind11
           python3.7 setup.py install
           python3.7 runtests.py -u
 
   build-gcc:
     runs-on: ubuntu-latest
+    needs: python-test
     container: centos:7.2.1511
     steps:
       - uses: actions/checkout@v2
@@ -35,6 +34,7 @@ jobs:
   
   build-cmake:
     runs-on: ubuntu-latest
+    needs: build-gcc
     container: centos:7.2.1511
     steps:
       - uses: actions/checkout@v2
@@ -43,7 +43,7 @@ jobs:
           . .github/workflows/setup.sh
           . .github/workflows/pull_data.sh
           . .github/workflows/cmake_test.sh
-          ls -al
+          ls -al    
       - uses: actions/upload-artifact@v2
         with:
           name: cmake-artifact
