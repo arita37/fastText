@@ -48,6 +48,12 @@ jobs:
           name: cmake-artifact
           path: result
 
+#          multiple path or files as an artifact
+#          path: |
+#            result/
+#           output.txt
+#            something
+
   website-build:
     runs-on: ubuntu-latest
     needs: build-cmake
