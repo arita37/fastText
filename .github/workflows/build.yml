@@ -36,7 +36,6 @@ jobs:
       options: --user root
     steps:
       - uses: actions/checkout@v2
-
       - run: |
           python3.7 -m pip install pybind11
           python3.7 setup.py install
@@ -48,7 +47,6 @@ jobs:
     container: myuga/centos:7.2
     steps:
       - uses: actions/checkout@v2
-
       - run: |
           . .github/workflows/pull_data.sh
           . .github/workflows/gcc_test.sh
