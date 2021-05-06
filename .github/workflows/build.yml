@@ -19,19 +19,20 @@ jobs:
         uses: docker/login-action@v1 
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: myugan/centos:7.2
+          tags: myuga/centos:7.2
 
   python-test:
     runs-on: ubuntu-latest
+    needs: docker-build
     container: 
-      image: myugan/centos:7.2
+      image: myuga/centos:7.2
       options: --user root
     steps:
       - uses: actions/checkout@v2
@@ -44,7 +45,7 @@ jobs:
   build-gcc:
     runs-on: ubuntu-latest
     needs: python-test
-    container: myugan/centos:7.2
+    container: myuga/centos:7.2
     steps:
       - uses: actions/checkout@v2
 
@@ -55,7 +56,7 @@ jobs:
   build-cmake:
     runs-on: ubuntu-latest
     needs: build-gcc
-    container: myugan/centos:7.2
+    container: myuga/centos:7.2
     steps:
       - uses: actions/checkout@v2
 
