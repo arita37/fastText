@@ -22,12 +22,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: arita37/centos:7.2
+      #- name: Build and push
+      #  id: docker_build
+      #  uses: docker/build-push-action@v2
+      #  with:
+      #    push: true
+      #    tags: arita37/centos:7.2
 
 
   python-test:
