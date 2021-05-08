@@ -40,7 +40,6 @@ jobs:
           python3.7 -m pip install pybind11
           python3.7 setup.py install
           python3.7 runtests.py -u
-
   build-gcc:
     runs-on: ubuntu-latest
     needs: python-test
