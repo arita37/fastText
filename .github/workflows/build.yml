@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - adev
 
 jobs:
   docker-build:
