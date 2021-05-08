@@ -1,3 +1,22 @@
+
+
+## Infos
+
+
+List the artifact before download it
+
+curl -XGET H “Authorization: token $TOKEN” https://api.github.com/repos/username/fastText/actions/artifacts
+
+curl -XGET H “Authorization: token $TOKEN” https://api.github.com/repos/username/fastText/actions/artifacts/{artifact_id}
+
+
+need to create your Personal Access Token here https://github.com/settings/tokens
+
+
+
+
+
+
 ## Table of contents
 
 * [Introduction](#introduction)
