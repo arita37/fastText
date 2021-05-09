@@ -68,8 +68,8 @@ jobs:
           ls -al    
       - uses: actions/upload-artifact@v2
         with:
-          name: cmake-artifact
-          path: result
+          name: cmake-buildc
+          path: buildc
 
 
 

@@ -6,3 +6,4 @@ data
 fasttext
 result
 *build/
+/ztmp
