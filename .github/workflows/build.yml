@@ -27,14 +27,14 @@ jobs:
       #  uses: docker/build-push-action@v2
       #  with:
       #    push: true
-      #    tags: arita37/centos:7.2
+      #    tags: artia37/centos:7.2
 
 
   python-test:
     runs-on: ubuntu-latest
     needs: docker-build
     container: 
-      image: arita37/centos:7.2
+      image: artia37/centos:7.2
       options: --user root
     steps:
       - uses: actions/checkout@v2
@@ -47,7 +47,7 @@ jobs:
   build-gcc:
     runs-on: ubuntu-latest
     needs: python-test
-    container: arita37/centos:7.2
+    container: artia37/centos:7.2
     steps:
       - uses: actions/checkout@v2
       - run: |
@@ -58,7 +58,7 @@ jobs:
   build-cmake:
     runs-on: ubuntu-latest
     needs: build-gcc
-    container: arita37/centos:7.2
+    container: artia37/centos:7.2
     steps:
       - uses: actions/checkout@v2
 
